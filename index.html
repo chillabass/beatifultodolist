@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>TODO List</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Todo list by Nikolay</h1>
+        <div class="flex__container">
+            <div class="list__buttons">
+                <input type="button" value="Все" id="list-wrapper-filter-all">
+                <input type="button" value="Выполненные" id="list-wrapper-filter-done">
+                <input type="button" value="В работе" id="list-wrapper-filter-inwork">
+                <input type="button" value="Удалить выполненные" id="list-wrapper-clearDone">
+                <input type="button" value="Удалить все" id="list-wrapper-clearAll">
+            </div>
+            <div class="list__tasks">
+                <div class="list__tasks-wrapper">
+                    <input type="text" class="list__tasks-input" placeholder="Введите Вашу задачу здесь...">
+                </div>
+                <div class="list__tasks-wrapper">
+                    <input type="checkbox" class="checkbox">
+                    <label class="list__tasks-label">Купить покушац!</label>
+                    <button class="task__close"></button>
+                </div>                
+            </div>
+            <div class="list__buttons">
+                <input type="button" value="Все" id="list-wrapper-filter-all">
+                <input type="button" value="Выполненные" id="list-wrapper-filter-done">
+                <input type="button" value="В работе" id="list-wrapper-filter-inwork">
+                <input type="button" value="Удалить выполненные" id="list-wrapper-clearDone">
+                <input type="button" value="Удалить все" id="list-wrapper-clearAll">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Cambria, Cochin, Georgia, Times, 'Times New Roman', sans-serif;
+}
+
+body {
+    background-color: #222226;
+}
+
+.container {
+    background-color: rgb(139, 134, 134);
+    margin: 0 auto;
+    width: 70%;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    padding: 10px;
+}
+
+.flex__container {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #333;
+    min-height: 500px;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.list__buttons {
+    padding: 10px;
+}
+
+.list__tasks {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    background-color: rgb(206, 206, 206);
+}
+
+
+.list__tasks-wrapper {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #75831b;
+    align-content: stretch;
+    position: relative;
+}
+
+.list__tasks-wrapper:nth-child(even) {
+    background-color: #ccdd55;
+}
+
+.list__tasks-input, 
+.list__tasks-label {
+    padding: 15px;
+    flex-grow: 2;
+}
+.task__close {
+    position: absolute;
+    border-radius: 50%;
+    border: none;
+    color:maroon;
+    right: 5px;
+    top: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    text-align: center;
+    background-color: transparent;
+    transition: .2s ease-out;
+}
+
+.task__close::after {
+    content:'✖';
+    /* display: none; */
+}
+
+.checkbox {
+    border:1px solid rgb(201, 25, 25);
+    min-width: 20px;
+    min-height: 20px;
+    transition: .2s;
+}
+
