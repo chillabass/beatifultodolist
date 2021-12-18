@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1>Todo list by Nikolay</h1>
-        <div class="flex__container">
+        <div class="flex__container" id="tasks_container">
             <div class="list__buttons">
                 <input type="button" value="Все" id="list-wrapper-filter-all">
                 <input type="button" value="Выполненные" id="list-wrapper-filter-done">
@@ -20,15 +20,12 @@
                 <input type="button" value="Удалить выполненные" id="list-wrapper-clearDone">
                 <input type="button" value="Удалить все" id="list-wrapper-clearAll">
             </div>
-            <div class="list__tasks">
+            <div class="list__header">
                 <div class="list__tasks-wrapper">
-                    <input type="text" class="list__tasks-input" placeholder="Введите Вашу задачу здесь...">
+                    <input type="text" id="inputTask" class="list__tasks-input" placeholder="Введите Вашу задачу здесь...">
                 </div>
-                <div class="list__tasks-wrapper">
-                    <input type="checkbox" class="checkbox">
-                    <label class="list__tasks-label">Купить покушац!</label>
-                    <button class="task__close"></button>
-                </div>                
+            </div>
+            <div class="list__tasks">
             </div>
             <div class="list__buttons">
                 <input type="button" value="Все" id="list-wrapper-filter-all">
@@ -39,6 +36,7 @@
             </div>
         </div>
     </div>
+    <script type="module" src="js/index.js"></script>
 </body>
 
 </html>
