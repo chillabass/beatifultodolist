@@ -76,6 +76,7 @@ h1 {
     width: 80%;
     padding: 15px;
     flex-grow: 2;
+    word-break: break-all;
 }
 
 .list__tasks-input {
@@ -117,3 +118,35 @@ h1 {
     transition: .2s;
 }
 
+/* Стили окна ошибки */
+.error__window {
+    position: absolute;
+    background-color: rgb(214, 36, 36);
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    align-items: center;
+    display: none;
+    opacity: 0;
+    color:#eee;
+    text-align: center;
+    font-size: 15px;
+}
+
+@keyframes popup
+{
+    from{
+        opacity:0;
+        transform: translateZ(0) scale(0, 0);
+    }
+
+    to{
+        opacity:1;
+        transform: translateZ(0) scale(1, 1);
+    }
+}
+
+.error__window-anim {
+    display: flex;
+    animation: popup 0.5s cubic-bezier(0.16, 0.87, 0.48, 0.99) forwards;
+}
