@@ -32,16 +32,81 @@ h1 {
     border-radius: 10px;
 }
 
-.list__buttons {
-    padding: 10px;
-}
-
+/*  */
 .list__header,
 .list__tasks {
-    width: 80%;
+    width: 90%;
+}
+
+.list__buttons {
+    padding: 10px;
+    min-height: 40px;
+    color: #eee;
+    /* background-color: rgb(175, 39, 39); */
+    display: flex;
+    position: relative;
+    /* justify-content: space-between; */
+    text-align: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+.list__buttons-count,
+.list__buttons-filters,
+.list__buttons-clear {
+    cursor: pointer;
+    transition: .1s;
+    /* border: 1px solid #eee; */
+}
+
+.list__buttons-filters label:hover,
+.list__buttons-clear:hover {
+    color: #7dd6ff;
+}
+
+.list__buttons-count {
+    position: absolute;
+    left: 0;
+    width: 25%;
+    cursor: default;
+}
+
+.list__buttons-filters {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.list__buttons-clear {
+    display: none;
+    width: 25%;
+    position: absolute;
+    right: 0;
+}
+
+/* .list__buttons-filters {
+    list-style-type: none;
+    padding: 5px;
+} */
+
+input[type=radio] {
+    display: none;
+}
+
+label[type=radio] {
+    padding: 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.filter-selected {
+    border: 1px solid #7dd6ff;
+    border-radius: 3px;
+    padding: 5px;
+    color: #7dd6ff;
 }
 
 .list__tasks {
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

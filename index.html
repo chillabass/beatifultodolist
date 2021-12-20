@@ -13,27 +13,25 @@
     <div class="container">
         <h1>Todo list by Nikolay</h1>
         <div class="flex__container" id="tasks_container">
-            <div class="list__buttons">
-                <input type="button" value="Все" id="list-wrapper-filter-all">
-                <input type="button" value="Выполненные" id="list-wrapper-filter-done">
-                <input type="button" value="В работе" id="list-wrapper-filter-inwork">
-                <input type="button" value="Удалить выполненные" id="list-wrapper-clearDone">
-                <input type="button" value="Удалить все" id="list-wrapper-clearAll">
-            </div>
-            <div class="list__header">
-                <div class="list__tasks-wrapper">
-                    <input type="text" id="inputTask" class="list__tasks-input" placeholder="Введите Вашу задачу здесь..." autofocus>
+            <header class="list__header">
+                <div class="list__buttons">
+                    <span class="list__buttons-count">0 задач</span>
+                    <div class="list__buttons-filters">
+                        <label type="radio" class="filter-selected" id="filterAll">Все</label>
+                        <label type="radio" id="filterDone">Выполненные</label>
+                        <label type="radio" id="filterWork">В работе</label>
+                    </div>
+                    <span id="clear_done" class="list__buttons-clear">Удалить выполненные</span>
                 </div>
-            </div>
+                <div class="list__tasks-wrapper">
+                    <input type="text" id="inputTask" class="list__tasks-input"
+                        placeholder="Введите Вашу задачу здесь..." autofocus>
+                </div>
+            </header>
+            <!-- -------------------- НЕ ТРОГАТЬ!!!!--------------------- -->
             <div class="list__tasks">
             </div>
-            <div class="list__buttons">
-                <input type="button" value="Все" id="list-wrapper-filter-all">
-                <input type="button" value="Выполненные" id="list-wrapper-filter-done">
-                <input type="button" value="В работе" id="list-wrapper-filter-inwork">
-                <input type="button" value="Удалить выполненные" id="list-wrapper-clearDone">
-                <input type="button" value="Удалить все" id="list-wrapper-clearAll">
-            </div>
+            <!-- -------------------- НЕ ТРОГАТЬ!!!!--------------------- -->
         </div>
         <div class="error__window">
             <p></p>
