@@ -26,13 +26,12 @@ h1 {
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    background-color: #333;
+    background-color: #292929;
     min-height: 500px;
     width: 50%;
     border-radius: 10px;
 }
 
-/*  */
 .list__header,
 .list__tasks {
     width: 90%;
@@ -42,10 +41,8 @@ h1 {
     padding: 10px;
     min-height: 40px;
     color: #eee;
-    /* background-color: rgb(175, 39, 39); */
     display: flex;
     position: relative;
-    /* justify-content: space-between; */
     text-align: center;
     align-items: center;
     font-size: 15px;
@@ -55,12 +52,12 @@ h1 {
 .list__buttons-filters,
 .list__buttons-clear {
     cursor: pointer;
-    transition: .1s;
-    /* border: 1px solid #eee; */
+    transition: .2s;
 }
 
 .list__buttons-filters label:hover,
 .list__buttons-clear:hover {
+    border: 1px solid #156991;
     color: #7dd6ff;
 }
 
@@ -83,22 +80,15 @@ h1 {
     right: 0;
 }
 
-/* .list__buttons-filters {
-    list-style-type: none;
-    padding: 5px;
-} */
-
-input[type=radio] {
-    display: none;
-}
-
 label[type=radio] {
     padding: 5px;
     cursor: pointer;
     transition: .2s;
+    margin: 1px;
+    border: 1px solid transparent;
 }
 
-.filter-selected {
+.list__buttons-filters .filter-selected {
     border: 1px solid #7dd6ff;
     border-radius: 3px;
     padding: 5px;
@@ -136,7 +126,8 @@ label[type=radio] {
     color:rgb(95, 95, 95);
 }
 
-.list__tasks-input, 
+.list__tasks-input,
+.list__tasks .edit, 
 .list__tasks-label {
     width: 80%;
     padding: 15px;
@@ -144,11 +135,16 @@ label[type=radio] {
     word-break: break-all;
 }
 
-.list__tasks-input {
+.list__tasks-input,
+.list__tasks .edit {
     border-radius: 5px;
     border:none;
     transition:.2s;
     font-size: 18px;
+}
+
+.list__tasks .edit {
+    width: 100%;
 }
 
 .task__close {
