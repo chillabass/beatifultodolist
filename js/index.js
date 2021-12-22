@@ -1,5 +1,6 @@
 'use strict'
 import Task from './Task.js';
+import Mapex from './MapEx.js';
 
 let tasksContainer = document.getElementById('tasks_container');
 let tasksList = document.querySelector('.list__tasks');
@@ -9,27 +10,64 @@ let counter = document.querySelector('.list__buttons-count');
 let taskInput = document.querySelector('#inputTask');
 filters.filterType = 'filterAll';   // Тип фильтрации по умолчанию
 
-// Массив объектов задач
-let tasks = new Map();
+// Коллекция объектов задач
+let tasks = new Mapex();
+
+// Инициализируем новую коллекцию задач
+function initTasksMap(array) {
+    let tasks = new Mapex();
+    array.forEach(item => {
+        let task = new Task(item[1].text, item[1].id, item[1].isDone);
+        tasks.set(String(item[1].id), task);
+    });
+    // Обработчик события изменения Map (добавление задачи и удаление задачи)
+    tasks.onChange = () => {
+        counter.textContent = `${tasks.size} ${declOfNum(tasks.size, ['задача', 'задачи', 'задач'])}`;
+        if (Array.from(tasks).filter(item => item[1].isDone).length > 0) {
+            clearDone.style.display = 'block';
+        } else {
+            clearDone.style.display = 'none';
+        }
+    };
+    tasks.onChange();
+    return tasks;
+}
 
 function showError(target, text, duration) {
-    let errorObj = document.querySelector('.error__window');
-    let className = 'error__window-anim';
+    let errorObj = document.createElement('div');
+    let p = document.createElement('p');
+    errorObj.append(p);
+    errorObj.classList.add('error__window');
+
     let size = target.getBoundingClientRect();
     let x = size.left + size.width;
     let y = size.top;
     errorObj.style.cssText = `top: ${y}px; left: ${x}px`;
     errorObj.firstChild.textContent = text;
+    let className = 'error__window-anim';
     errorObj.classList.add(className);
+    document.querySelector('.container').append(errorObj);
     setTimeout(() => {
-        errorObj.classList.remove(className);
+        errorObj.remove();
     }, duration);
+    ////////////////////////////
+    // let errorObj = document.querySelector('.error__window');
+    // let className = 'error__window-anim';
+    // let size = target.getBoundingClientRect();
+    // let x = size.left + size.width;
+    // let y = size.top;
+    // errorObj.style.cssText = `top: ${y}px; left: ${x}px`;
+    // errorObj.firstChild.textContent = text;
+    // errorObj.classList.add(className);
+    // setTimeout(() => {
+    //     errorObj.classList.remove(className);
+    // }, duration);
 }
 
 // Добавление задачи
 taskInput.addEventListener('keydown', function (event) {
-    if ((event.code === 'Enter' || event.code === 'NumpadEnter') && event.target.tagName === 'INPUT') {
-        // Если поле в иnput пустое - выводим окошко с ошибкой
+    if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        // Если поле в input пустое - выводим окошко с ошибкой
         if (taskInput.value === '') {
             showError(taskInput, 'Текст задания не может быть пустым!', 4000);
             return;
@@ -37,12 +75,9 @@ taskInput.addEventListener('keydown', function (event) {
         let id = Date.now();
         let labelText = taskInput.value;
         taskInput.value = '';
-        // Добавляем div в список задач
         tasksList.append(createTask(id, labelText));
-        // Добавляем задачу в массив
         let task = new Task(labelText, id);
         tasks.set(String(id), task);
-        tasks.onChange();
     }
 });
 
@@ -71,14 +106,16 @@ function createTask(id, text, isDone = false) {
     label.textContent = text;
     label.title = 'Двойной клик - редактировать';
     label.classList.add('list__tasks-label');
+    // По дабл-клику заменяем label на input, для изменения условия задачи
     label.addEventListener('dblclick', function (event) {
         let oldChild = div.children[1];
         let newChild = document.createElement('input');
         newChild.value = oldChild.textContent;
         newChild.classList.add('edit');
         checkbox.hidden = true;
+        // По нажатию на Enter возвращаем все обратно
         newChild.addEventListener('keydown', function(event) {
-            if (event.type !== 'blur' && event.code !== 'Enter' && event.code !== 'NumpadEnter') return;
+            if (event.code !== 'Enter' && event.code !== 'NumpadEnter') return;
             if (newChild.value === '') {
                 showError(newChild, 'Текст задания не может быть пустым!', 4000);
                 return;
@@ -100,7 +137,6 @@ function createTask(id, text, isDone = false) {
     button.addEventListener('click', () => {
         button.parentElement.remove();
         tasks.delete(String(id));
-        tasks.onChange();
     });
     div.append(button);
     return div;
@@ -136,34 +172,26 @@ filters.addEventListener('click', function (event) {
         selectedFilter.classList.toggle(className);
         let value = target.id;
         filters.filterType = value;
-        console.log(value)
         filterElementList(value);
     }
 });
 
+// Удаляем выполненные задачи из коллекции и с интерфейса
 clearDone.addEventListener('click', function () {
-    tasks = new Map(Array.from(tasks).filter(item => !item[1].isDone));
+    tasks = initTasksMap(Array.from(tasks).filter(item => !item[1].isDone));
     filterElementList(null);
-    tasks.onChange = () => {
-        counter.textContent = `${tasks.size} ${declOfNum(tasks.size, ['задача', 'задачи', 'задач'])}`;
-        if (Array.from(tasks).filter(item => item[1].isDone).length > 0) {
-            clearDone.style.display = 'block';
-        } else {
-            clearDone.style.display = 'none';
-        }
-    }
-    tasks.onChange();
 });
 
+// Показываем крестик на задаче
 tasksList.addEventListener('pointerover', function (event) {
     let target = event.target;
     target = target.closest('div');
-    // let index = target.children.length - 1;
     if (target.children.length > 0 && target.lastChild.tagName === 'BUTTON') {
         target.lastChild.hidden = false;
     }
 });
 
+// Скрываем крестик на задаче
 tasksList.addEventListener('pointerout', function (event) {
     let target = event.target;
     target = target.closest('div');
@@ -185,16 +213,8 @@ function declOfNum(n, textForms) {
 // После построения ДОМ-дерева читаем из локального хранилища данные о задачах
 document.addEventListener('DOMContentLoaded', function () {
     let restoreData = localStorage.getItem('tasks');
-    tasks = new Map(Object.entries(JSON.parse(restoreData)));
-    tasks.onChange = () => {
-        counter.textContent = `${tasks.size} ${declOfNum(tasks.size, ['задача', 'задачи', 'задач'])}`;
-        if (Array.from(tasks).filter(item => item[1].isDone).length > 0) {
-            clearDone.style.display = 'block';
-        } else {
-            clearDone.style.display = 'none';
-        }
-    }
-    tasks.onChange();
+    if (!restoreData) return;
+    tasks = initTasksMap(Array.from(Object.entries(JSON.parse(restoreData))));
     console.log(tasks);
     tasks.forEach(element => {
         console.log(element);
@@ -204,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Перед уходом со страницы сохраняем задачи в локальное хранилище
 window.addEventListener('beforeunload', function () {
-    let saveData = JSON.stringify(Object.fromEntries(tasks));
+    let obj = Object.fromEntries(tasks);
+    let saveData = JSON.stringify(obj);
     localStorage.setItem('tasks', saveData);
 });
-
