@@ -6,10 +6,28 @@
 
 body {
     background-color: #222226;
+    /* background-image: url('/img/observer.jpg'); */
+}
+
+.bg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    display: block;
+    background-image: url('/img/observer.jpg');
+    width: 100%;
+    height: 100%;
+    -webkit-filter: brightness(.7);
+    -moz-filter: brightness(.7);
+    -o-filter: brightness(.7);
+    -ms-filter: brightness(.7);
+    filter: brightness(.7);
+    background-repeat: repeat;
 }
 
 .container {
-    background-color: rgb(139, 134, 134);
+    background-color: transparent;
     margin: 0 auto;
     width: 70%;
     min-height: 100vh;
@@ -55,8 +73,7 @@ h1 {
     transition: .2s;
 }
 
-.list__buttons-filters label:hover,
-.list__buttons-clear:hover {
+.list__buttons-filters label:hover {
     border: 1px solid #156991;
     color: #7dd6ff;
 }
@@ -78,6 +95,12 @@ h1 {
     width: 25%;
     position: absolute;
     right: 0;
+    border: 1px solid transparent;
+    transition: .2s;
+}
+
+.list__buttons-clear:hover {
+    color: #7dd6ff;
 }
 
 label[type=radio] {

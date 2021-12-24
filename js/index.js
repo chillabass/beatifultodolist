@@ -2,7 +2,6 @@
 import Task from './Task.js';
 import Mapex from './MapEx.js';
 
-let tasksContainer = document.getElementById('tasks_container');
 let tasksList = document.querySelector('.list__tasks');
 let filters = document.querySelector('.list__buttons-filters');
 let clearDone = document.querySelector('#clear_done');
@@ -16,10 +15,6 @@ let tasks = new Mapex();
 // Инициализируем новую коллекцию задач
 function initTasksMap(array) {
     let tasks = new Mapex();
-    array.forEach(item => {
-        let task = new Task(item[1].text, item[1].id, item[1].isDone);
-        tasks.set(String(item[1].id), task);
-    });
     // Обработчик события изменения Map (добавление задачи и удаление задачи)
     tasks.onChange = () => {
         counter.textContent = `${tasks.size} ${declOfNum(tasks.size, ['задача', 'задачи', 'задач'])}`;
@@ -29,16 +24,25 @@ function initTasksMap(array) {
             clearDone.style.display = 'none';
         }
     };
-    tasks.onChange();
+    if (array) {
+        array.forEach(item => {
+            let task = new Task(item[1].text, item[1].id, item[1].isDone);
+            /* Присваиваем каждой задаче обработчик, обновляющее количество задач и показывает/скрывают кнопку удаления задач,
+             который будет вызываться при изменении любого поля у задачи */
+            task.onChange = tasks.onChange;
+            tasks.set(String(item[1].id), task);
+        });
+    }
     return tasks;
 }
 
 function showError(target, text, duration) {
+    // Создаем div и внутри p для сообщения об ошибке
     let errorObj = document.createElement('div');
     let p = document.createElement('p');
     errorObj.append(p);
     errorObj.classList.add('error__window');
-
+    // Устанавливаем необходимые стили
     let size = target.getBoundingClientRect();
     let x = size.left + size.width;
     let y = size.top;
@@ -47,21 +51,10 @@ function showError(target, text, duration) {
     let className = 'error__window-anim';
     errorObj.classList.add(className);
     document.querySelector('.container').append(errorObj);
+    // Через определенное количество времени удаляем ошибку
     setTimeout(() => {
         errorObj.remove();
     }, duration);
-    ////////////////////////////
-    // let errorObj = document.querySelector('.error__window');
-    // let className = 'error__window-anim';
-    // let size = target.getBoundingClientRect();
-    // let x = size.left + size.width;
-    // let y = size.top;
-    // errorObj.style.cssText = `top: ${y}px; left: ${x}px`;
-    // errorObj.firstChild.textContent = text;
-    // errorObj.classList.add(className);
-    // setTimeout(() => {
-    //     errorObj.classList.remove(className);
-    // }, duration);
 }
 
 // Добавление задачи
@@ -77,6 +70,7 @@ taskInput.addEventListener('keydown', function (event) {
         taskInput.value = '';
         tasksList.append(createTask(id, labelText));
         let task = new Task(labelText, id);
+        task.onChange = tasks.onChange;
         tasks.set(String(id), task);
     }
 });
@@ -96,7 +90,6 @@ function createTask(id, text, isDone = false) {
     checkbox.addEventListener('change', () => {
         div.classList.toggle('completed');
         tasks.get(div.dataset.id).isDone = checkbox.checked;
-        tasks.onChange();
         filterElementList(null);
     });
     div.append(checkbox);
@@ -114,7 +107,7 @@ function createTask(id, text, isDone = false) {
         newChild.classList.add('edit');
         checkbox.hidden = true;
         // По нажатию на Enter возвращаем все обратно
-        newChild.addEventListener('keydown', function(event) {
+        newChild.addEventListener('keydown', function (event) {
             if (event.code !== 'Enter' && event.code !== 'NumpadEnter') return;
             if (newChild.value === '') {
                 showError(newChild, 'Текст задания не может быть пустым!', 4000);
@@ -213,11 +206,8 @@ function declOfNum(n, textForms) {
 // После построения ДОМ-дерева читаем из локального хранилища данные о задачах
 document.addEventListener('DOMContentLoaded', function () {
     let restoreData = localStorage.getItem('tasks');
-    if (!restoreData) return;
-    tasks = initTasksMap(Array.from(Object.entries(JSON.parse(restoreData))));
-    console.log(tasks);
+    tasks = restoreData ? initTasksMap(Array.from(Object.entries(JSON.parse(restoreData)))) : initTasksMap(null);
     tasks.forEach(element => {
-        console.log(element);
         tasksList.append(createTask(element.id, element.text, element.isDone));
     });
 });
