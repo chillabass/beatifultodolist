@@ -15,6 +15,7 @@ export default class Error {
             let p = document.createElement('p');
             errorObj.append(p);
             errorObj.classList.add('error__window');
+
             // Устанавливаем необходимые стили
             let size = target.getBoundingClientRect();
             let x = size.left + size.width;
@@ -24,6 +25,7 @@ export default class Error {
             let className = 'error__window-anim';
             errorObj.classList.add(className);
             document.querySelector('.container').append(errorObj);
+            
             // Через определенное количество времени удаляем ошибку
             setTimeout(() => {
                 errorObj.remove();

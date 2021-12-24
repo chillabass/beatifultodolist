@@ -30,7 +30,7 @@ export default class Task {
         this._text = text;
         if (this.onChange) this.onChange();
     }
-    // Для сериализации объекта задачи в JSON
+    // Метод сериализации объекта задачи в JSON
     toJSON() {
         return {
             id: this._id,

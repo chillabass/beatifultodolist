@@ -1,6 +1,6 @@
 'use strict'
 
-export default class MapEx extends Map {
+export default class Mapex extends Map {
     // Конструктор расширенного мапа, принимает массив объектов
     constructor(value) {
         super(value);

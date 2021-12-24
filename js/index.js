@@ -1,6 +1,6 @@
 'use strict'
 import Task from './Task.js';
-import Mapex from './MapEx.js';
+import Mapex from './Mapex.js';
 import Error from './Error.js';
 
 let tasksList = document.querySelector('.list__tasks');
