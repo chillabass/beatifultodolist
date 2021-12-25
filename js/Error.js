@@ -1,7 +1,7 @@
 'use strict'
 
 export default class Error {
-    constructor(target) {
+    constructor() {
         if (!Error._instance) {
             this._isShowed = false;
             Error._instance = this;

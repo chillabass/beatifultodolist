@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <title>TODO List</title>
 </head>
 <body>
     <div class="bg"></div>
     <div class="container">
-        <h1>Todo list by Nikolay</h1>
+        <h1 title="Design by Art Lebedev">Todo list by Nikolay :)</h1>
         <div class="flex__container" id="tasks_container">
             <header class="list__header">
                 <div class="list__buttons">
                     <span class="list__buttons-count">0 задач</span>
                     <div class="list__buttons-filters">
-                        <label type="radio" class="filter-selected" id="filterAll">Все</label>
-                        <label type="radio" id="filterDone">Выполненные</label>
-                        <label type="radio" id="filterWork">В работе</label>
+                        <label class="radio filter-selected" id="filterAll">Все</label>
+                        <label class="radio" id="filterDone">Выполненные</label>
+                        <label class="radio" id="filterWork">В работе</label>
                     </div>
                     <span id="clear_done" class="list__buttons-clear">Удалить выполненные</span>
                 </div>

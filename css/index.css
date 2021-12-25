@@ -1,14 +1,14 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Arial, Cambria, Cochin, Georgia, Times, 'Times New Roman', sans-serif;
+    font-family: 'Exo 2', Arial, Cambria, Cochin, Georgia, Times, 'Times New Roman', sans-serif;
 }
 
 body {
     background-color: #222226;
-    /* background-image: url('/img/observer.jpg'); */
 }
 
+/* Фоновая картинка */
 .bg {
     position: fixed;
     left: 0;
@@ -26,6 +26,7 @@ body {
     background-repeat: repeat;
 }
 
+/* Общий контейнер, занимает по центра 70% ширины страницы */
 .container {
     background-color: transparent;
     margin: 0 auto;
@@ -36,9 +37,12 @@ body {
 h1 {
     text-align: center;
     padding: 10px;
-    
+    color: rgb(255, 81, 212);
+    text-shadow: 2px 2px 1px#292929;
+    cursor: default;
 }
 
+/* Контейнер тудушки */
 .flex__container {
     margin: 0 auto;
     display: flex;
@@ -56,6 +60,7 @@ h1 {
     width: 90%;
 }
 
+/* Стили элементов хедера */
 .list__buttons {
     padding: 10px;
     min-height: 40px;
@@ -75,7 +80,7 @@ h1 {
 }
 
 .list__buttons-filters label:hover {
-    border: 1px solid #156991;
+    border: 2px solid #156991;
     color: #7dd6ff;
 }
 
@@ -104,21 +109,21 @@ h1 {
     color: #7dd6ff;
 }
 
-label[type=radio] {
+label[class=radio] {
     padding: 5px;
     cursor: pointer;
     transition: .2s;
-    margin: 1px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
 }
 
 .list__buttons-filters .filter-selected {
-    border: 1px solid #7dd6ff;
+    border: 2px solid #7dd6ff;
     border-radius: 3px;
     padding: 5px;
     color: #7dd6ff;
 }
 
+/* Список с задачами */
 .list__tasks {
     margin-bottom: 30px;
     display: flex;
@@ -132,7 +137,7 @@ label[type=radio] {
     padding: 10px;
     display: flex;
     align-items: center;
-    background-color: #2785b1;
+    background-color: #4daad4;
     align-content: stretch;
     position: relative;
     box-shadow: 0px 8px 15px -5px rgb(95, 95, 95);
@@ -142,7 +147,6 @@ label[type=radio] {
 .list__tasks-wrapper:nth-child(even) {
     background-color: #3098c9;
 }
-
 
 .list__tasks .completed {
     text-decoration: line-through;
@@ -203,7 +207,7 @@ label[type=radio] {
     transition: .2s;
 }
 
-/* Стили окна ошибки */
+/* Окно ошибки при вводе пустой строки */
 .error__window {
     position: absolute;
     background-color: rgb(214, 36, 36);
@@ -218,6 +222,7 @@ label[type=radio] {
     font-size: 15px;
 }
 
+/* Анимация появления окна ошибки */
 @keyframes popup
 {
     from{

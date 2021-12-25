@@ -116,7 +116,7 @@ function createTask(id, text, isDone = false) {
 
 function filterElementList(type) {
     // Если вызываем фильтрацию из метода checkbox'а
-    if (type == null) {
+    if (type === null) {
         type = filters.filterType;  // то фильтруем по последнему использованному типу
     }
     let arr = Array.from(tasks);

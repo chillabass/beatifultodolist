@@ -5,13 +5,8 @@ export default class Task {
         if (text === '') throw new Error('Текст задания не может быть пустым!');
         this._text = text;      // Условие задачи
         this._id = id;          // Уникальный идентификатор задачи
-<<<<<<< HEAD
         this._isDone = isDone;  // Выполнена ли задача
         this.onChange = null;   // событие при изменении поля
-=======
-        this._isDone = isDone;   // Выполнена ли задача
-        this.onChange = null;
->>>>>>> 6dff784e35023b451f0c5fc4d8d5492fcf363a1e
     }
     get isDone() {
         return this._isDone;
